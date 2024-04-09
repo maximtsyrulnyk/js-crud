@@ -38,12 +38,37 @@
         {{else}}
         <ul>
           {{#each list}}
-          <li>{{email}} | {{login}}<a href="/user-delete?id={{id}}">(видалити)</a></li>
+          <li>{{email}} | {{login}} | {{id}}<a href="/user-delete?id={{id}}">(видалити)</a></li>
           {{/each}}
         </ul>
         {{/if}}
         {{/with}}
       </div>
+  </section>
+
+  <section>
+    <div class="form">
+      <h1 class="form__title">Оновити пошту користувача</h1>
+      <form method="POST" action="/user-update">
+        <div class="form__content">
+          <div class="form_field">
+            <label for="id" class="form__label">ID</label>
+            <input type="id" name="id" class="form__input">
+          </div>
+          <div class="form_field">
+            <label for="email" class="form__label">Нова email адреса</label>
+            <input type="email" name="email" class="form__input">
+          </div>
+          <div class="form_field">
+            <label for="password" class="form__label">Пароль</label>
+            <input type="password" name="password" class="form__input">
+          </div>
+          <button class="form_button">
+            Відправити
+          </button>
+        </div>
+      </form>
+    </div>
   </section>
 </main>
 
