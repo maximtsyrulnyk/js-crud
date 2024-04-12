@@ -11,7 +11,7 @@ class Product {
     this.name = name
     this.price = price
     this.description = description
-    this.id = new Date().getTime()
+    this.id = Math.random();
   }
   verifyDescription = (description) => this.description === description
   static add = (product) => {
