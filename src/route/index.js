@@ -11,12 +11,41 @@ class Product {
     this.name = name
     this.price = price
     this.description = description
+    this.id = new Date().getTime()
   }
+  verifyDescription = (description) => this.description === description
   static add = (product) => {
     this.#list.push(product)
   }
-  static getList = () => {
-    return this.#list
+  static getList = () => this.#list
+
+  static getById = (id) => this.#list.findIndex(product => product.id === id)
+
+  static deleteById = (id) => {
+    const index = this.#list.findIndex((product) => product.id === id,)
+    if(index !== -1) {
+      this.#list.splice(index, 1)
+      return true
+    } else {
+      return false
+    }
+  }
+
+  static updateById = (id, {data}) => {
+    const product = this.getById(id);
+
+    if(product) {
+      this.update(product, data)
+
+      return true
+    } else {
+      return false
+    }
+  }
+  static update = (product, {email}) => {
+    if(email) {
+      product.email = email
+    }
   }
 }
 
@@ -56,9 +85,53 @@ router.post('/product-create', function (req, res) {
   Product.add(product)
   console.log(Product.getList());
   // ↙️ cюди вводимо назву файлу з сontainer
-  res.render('product-create', {
+  res.render('success-info', {
     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-    style: 'product-create',
+    style: 'success-info',
+    info: result ? 'Товар оновлений' : 'Сталася помилка'
+  })
+  // ↑↑ сюди вводимо JSON дані
+})
+
+// ================================================================
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.get('/product-delete', function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const {id} = req.query
+  Product.deleteById(Number (id));
+
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('success-info', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'success-info',
+    info: 'Товар видалений', 
+  })
+  // ↑↑ сюди вводимо JSON дані
+})
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.post('/product-update', function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const {email, password, id} = req.body
+  let  result = false
+
+  const product = Product.getById(Number(id))
+  if(product.verifyDescription(description)) {
+    Product.update(product, {email})
+    result = true
+  }
+  Product.deleteById(Number (id));
+  console.log(email, password, id);
+  // let result = false;
+
+  // if()
+  // ↙️ cюди вводимо назву файлу з сontainer
+   
+  res.render('success-info', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'success-info',
+    info: 'Емайл пошта оновлена', 
   })
   // ↑↑ сюди вводимо JSON дані
 })
