@@ -39,9 +39,9 @@
         <mark>Список товарів пустий</mark>
         {{else}}
         <ul>
-          {{#each data.products.list}}
+          {{#with data.products.list}}
           <li>{{email}} | {{login}}</li>
-          {{/each}}
+          {{/with}}
         </ul>
         {{/if}}
         {{/with}}
