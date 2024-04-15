@@ -100,6 +100,7 @@ router.get('/product-list', (req, res) => {
 });
 // ================================================================
 router.get('/product-create', function(req, res) {
+    console.log(req.body);
     // ↙️ cюди вводимо назву файлу з сontainer
     res.render('product-create', {
       // вказуємо назву папки контейнера, в якій знаходяться наші стилі
