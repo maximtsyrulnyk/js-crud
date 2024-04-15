@@ -83,11 +83,6 @@ router.get('/', function (req, res) {
 router.post('/product-create', function (req, res) {
   // res.render генерує нам HTML сторінку
   const {name, price, description} = req.body
-  const id = Math.floor(Math.random() * 90000) + 10000; // Генерація ID
-  const createDate = new Date().toISOString(); // Поточна дата
-  const newProduct = { id, createDate, name, price, description };
-  product.add(newProduct);
-  res.render('container/alert', { message: 'Товар створено успішно' });
   const product = new Product(name, price, description);
   Product.add(product)
   console.log(Product.getList());
