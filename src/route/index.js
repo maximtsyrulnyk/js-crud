@@ -104,7 +104,14 @@ router.get('/product-list', (req, res) => {
   res.render('container/product-list', { productList });
 });
 // ================================================================
-
+router.get('/product-create', function(req, res) {
+    // ↙️ cюди вводимо назву файлу з сontainer
+    res.render('product-create', {
+      // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+      style: 'product-create',
+    })
+      // ↑↑ сюди вводимо JSON дані
+});
 // ↙️ тут вводимо шлях (PATH) до сторінки
 router.get('/product-delete', function (req, res) {
   // res.render генерує нам HTML сторінку
