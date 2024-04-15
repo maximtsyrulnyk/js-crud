@@ -30,6 +30,8 @@
   border: solid #ddd;
   padding: 8px;
   border-radius: 20px;
+  background-color: blue;
+  color: white;
 }
 
 main {
