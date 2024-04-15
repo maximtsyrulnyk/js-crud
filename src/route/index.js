@@ -7,6 +7,9 @@ const router = express.Router()
 
 class Product {
   static #list = []
+  getList() {
+    return this.#list;
+}
   constructor(name, price, description) {
     this.name = name
     this.price = price
@@ -22,7 +25,7 @@ class Product {
   static getById = (id) => this.#list.findIndex(product => product.id === id)
 
   static deleteById = (id) => {
-    const index = this.#list.findIndex((product) => product.id === id,)
+    const index = this.#list.findIndex((product) => product.id === id);
     if(index !== -1) {
       this.#list.splice(index, 1)
       return true
@@ -36,7 +39,7 @@ class Product {
 
     if(product) {
       this.update(product, data)
-
+      Object.assign(product, data);
       return true
     } else {
       return false
@@ -80,7 +83,11 @@ router.get('/', function (req, res) {
 router.post('/product-create', function (req, res) {
   // res.render генерує нам HTML сторінку
   const {name, price, description} = req.body
-
+  const id = Math.floor(Math.random() * 90000) + 10000; // Генерація ID
+  const createDate = new Date().toISOString(); // Поточна дата
+  const newProduct = { id, createDate, name, price, description };
+  product.add(newProduct);
+  res.render('container/alert', { message: 'Товар створено успішно' });
   const product = new Product(name, price, description);
   Product.add(product)
   console.log(Product.getList());
@@ -92,7 +99,10 @@ router.post('/product-create', function (req, res) {
   })
   // ↑↑ сюди вводимо JSON дані
 })
-
+router.get('/product-list', (req, res) => {
+  const productList = product.getList();
+  res.render('container/product-list', { productList });
+});
 // ================================================================
 
 // ↙️ тут вводимо шлях (PATH) до сторінки
