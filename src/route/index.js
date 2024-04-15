@@ -90,7 +90,7 @@ router.post('/product-create', function (req, res) {
   res.render('success-info', {
     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
     style: 'success-info',
-    info: result ? 'Товар оновлений' : 'Сталася помилка'
+    info: res ? 'Товар оновлений' : 'Сталася помилка'
   })
   // ↑↑ сюди вводимо JSON дані
 })
