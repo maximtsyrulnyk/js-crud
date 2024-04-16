@@ -20,7 +20,9 @@ class Product {
   static add = (product) => {
     this.#list.push(product)
   }
-  static getList = () => this.#list
+  static getList = () => {
+    return this.#list
+  }
 
   static getById = (id) => this.#list.findIndex(product => product.id === id)
 
