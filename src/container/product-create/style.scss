@@ -2,15 +2,16 @@
 
 .form {
     display: flex;
-    flex-direction: column;
     padding: s.space(4);
-    gap: s.space(8);
+    flex-direction: column;
+    gap: s.space(4);
 
     &__title {
         font-size: 20px;
         font-weight: bold;
         padding-bottom: s.space(1);
-        border-bottom: 1px solid s.color('light');
+        margin-bottom: s.space(2);
+        border-bottom: 1px solid s.color('blue');
     }
 
     &__content {
@@ -33,11 +34,10 @@
     }
 
     &__button {
-        border: solid s.color('light');
+        border: solid s.color('primary');
         padding: s.space(2);
         border-radius: 20px;
-        background-color: blue;
-        color: white;
+        
     }
 }
 
@@ -52,4 +52,7 @@ main {
         padding-top: 5px;
         padding-bottom: 5px;
     }
+}
+h1 .form__title {
+   color: blue; 
 }

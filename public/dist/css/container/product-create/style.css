@@ -1,14 +1,15 @@
 .form {
   display: flex;
-  flex-direction: column;
   padding: 16px;
-  gap: 32px;
+  flex-direction: column;
+  gap: 16px;
 }
 .form__title {
   font-size: 20px;
   font-weight: bold;
   padding-bottom: 4px;
-  border-bottom: 1px solid #ddd;
+  margin-bottom: 8px;
+  border-bottom: 1px solid;
 }
 .form__content {
   display: grid;
@@ -27,11 +28,9 @@
   padding: 8px;
 }
 .form__button {
-  border: solid #ddd;
+  border: solid;
   padding: 8px;
   border-radius: 20px;
-  background-color: blue;
-  color: white;
 }
 
 main {
@@ -44,6 +43,10 @@ main {
   padding-right: 15px;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+h1 .form__title {
+  color: blue;
 }
 
 /*# sourceMappingURL=style.css.map */
