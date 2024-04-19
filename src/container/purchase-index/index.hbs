@@ -4,5 +4,11 @@
 }}
 
 <main class="main">
-    {{> heading title="Товари"}}
+    {{> heading title="Товари" info="Комп'ютери та ноутбуки/ Комп'ютери, неттопи, моноблоки"}}
+
+    <div class="purchase-list">
+        {{> purchase-product data=data}}
+        {{> purchase-product data=data}}
+        {{> purchase-product data=data}}
+    </div>
 </main>
