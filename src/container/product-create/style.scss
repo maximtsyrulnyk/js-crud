@@ -1,0 +1,24 @@
+@use '../../lib/service.scss' as service;
+
+@use '../../component/heading/style.scss' as heading;
+@use '../../component/divider/style.scss' as divider;
+@use '../../component/field/style.scss' as field;
+@use '../../component/button/style.scss' as button;
+
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: space(10);
+    padding: space(10);
+}
+
+.form--card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: space(5);
+    padding: space(5);
+    border: 1px solid color(border);
+    border-radius: 10px;
+}
+

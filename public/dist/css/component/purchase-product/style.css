@@ -1,17 +1,57 @@
-/* Error: Undefined function.
- *   ,
- * 5 |     border: 1px solid s.color(border);
- *   |                       ^^^^^^^^^^^^^^^
- *   '
- *   src\component\purchase-product\style.scss 5:23  root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: "Error: Undefined function.\a   \2577 \a 5 \2502      border: 1px solid s.color(border);\d\a   \2502                        ^^^^^^^^^^^^^^^\a   \2575 \a   src\\component\\purchase-product\\style.scss 5:23  root stylesheet";
+.product-card {
+  border-radius: 10px;
+  border: 1px solid;
+  padding: space(4);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: space(3);
 }
+
+.product-card__image {
+  max-width: 300px;
+  width: 100%;
+}
+
+.product-card__title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.product-card__subtitle {
+  font-size: 16px;
+  color: color(gray);
+}
+
+.product-card__category {
+  padding: space(1) space(3);
+  font-size: 14px;
+  color: color(dark);
+  border: 1px solid transparent;
+}
+
+.product-card__category--1 {
+  border-color: blue;
+  color: blue;
+}
+
+.product-card__category--2 {
+  border-color: green;
+  color: green;
+}
+
+.product-card__button {
+  background-color: color(main);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transform: opacity 0.3s ease;
+}
+.product-card__button:hover {
+  opacity: 0.7;
+}
+
+/*# sourceMappingURL=style.css.map */
