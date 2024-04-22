@@ -34,13 +34,19 @@
 .field__input {
   border: 1px solid color("light");
   padding: space(2);
+  border-radius: 10px;
+}
+
+.field--disabled {
+  position: absolute;
+  display: none;
 }
 
 .button {
   background-color: color(main);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
@@ -65,6 +71,16 @@
   padding: space(5);
   border: 1px solid color(border);
   border-radius: 10px;
+}
+
+.cart {
+  display: grid;
+  gap: space(2);
+}
+
+.cart__item {
+  display: flex;
+  justify-content: space-between;
 }
 
 /*# sourceMappingURL=style.css.map */

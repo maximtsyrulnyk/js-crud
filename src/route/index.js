@@ -17,7 +17,7 @@ class Product {
     this.description = description
     this.category = category
     this.price = price
-    this.amount = amount;
+    this.amount = amount
   }
 
   static add = (...data) => {
@@ -52,22 +52,25 @@ Product.add(
   'https://picsum.photos/200/300',
   `Комп'ютер Artline Gaming (X43v31) AMD Ryzen 5 3600/`,
   `AMD Ryzen 5 3600 (3.6 - 4.2 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 480 ГБ/nVidia GeForce RTX 3050, 8 ГБ / без ОД`,
-  [{id: 1, text:'Готовий до відправки'}],
+  [
+    {id: 1, text:'Готовий до відправки'},
+    {id: 2, text: 'Топ продажів'},  
+  ],
   27000,
-  10
+  10,
 )
 Product.add(
   'https://picsum.photos/200/300',
-  `2 Комп'ютер Artline Gaming (X43v31) AMD Ryzen 5 3600/`,
-  `AMD Ryzen 5 3600 (3.6 - 4.2 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 480 ГБ/nVidia GeForce RTX 3050, 8 ГБ / без ОД`,
-  [{id: 1, text:'Готовий до відправки'}],
+  `Комп'ютер ProLine Business (B112p19) Intel Core i5 9400F/`,
+  `Intel Core i5 9400F (2.9 - 4.1 ГГц) / RAM 8 ГБ/ HDD 1 ТБ/ Intel UHD Graphics 630 / DVD+/-RW / LAN / DOS`,
+  [{id: 1, text:'Топ продажів'}],
   20000,
   10,
 )
 Product.add(
   'https://picsum.photos/200/300',
-  `3 Комп'ютер Artline Gaming (X43v31) AMD Ryzen 5 3600/`,
-  `AMD Ryzen 5 3600 (3.6 - 4.2 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 480 ГБ/nVidia GeForce RTX 3050, 8 ГБ / без ОД`,
+  `Комп'ютер ProLine Workstation (W67p03) Intel Xeon E--2226G/`,
+  `Intel Xeon E-2226G (3.4 - 4.7 ГГц) / RAM 16 ГБ/ SSD 512 ГБ / nVidia Quaardo P620, 2 ГБ / DVD+/-RW / LAN / без ОС`,
   [{id: 1, text:'Готовий до відправки'}],
   40000,
   10,

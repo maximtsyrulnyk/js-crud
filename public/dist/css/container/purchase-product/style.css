@@ -84,6 +84,12 @@
 .field__input {
   border: 1px solid color("light");
   padding: space(2);
+  border-radius: 10px;
+}
+
+.field--disabled {
+  position: absolute;
+  display: none;
 }
 
 .product-info__divider {
