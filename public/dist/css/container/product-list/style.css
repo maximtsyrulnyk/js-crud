@@ -1,0 +1,18 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 16px;
+}
+.form__title {
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #ddd;
+}
+.form__content {
+  display: grid;
+  gap: 16px;
+}
+
+/*# sourceMappingURL=style.css.map */

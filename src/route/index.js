@@ -7,7 +7,6 @@ const router = express.Router()
 
 class Product {
   static #list = []
-
   static #count = 0
 
   constructor(img, title, description, category, price, amount=0) {
@@ -23,6 +22,18 @@ class Product {
   static add = (...data) => {
     const newProduct = new Product(...data)
     this.#list.push(newProduct)
+  getList() {
+    return this.#list;
+}
+  constructor(name, price, description) {
+    this.name = name
+    this.price = price
+    this.description = description
+    this.id = Math.random();
+  }
+  verifyDescription = (description) => this.description === description
+  static add = (product) => {
+    this.#list.push(product)
   }
   static getList = () => {
     return this.#list
@@ -169,12 +180,18 @@ class Purchase {
       if(data.lastname) purchase.lastname = data.lastname
       if(data.phone) purchase.phone = data.phone
       if(data.email) purchase.email = data.email
+        static getById = (id) => this.#list.findIndex(product => product.id === id)
 
+  static deleteById = (id) => {
+    const index = this.#list.findIndex((product) => product.id === id);
+    if(index !== -1) {
+      this.#list.splice(index, 1)
       return true
     } else {
       return false
     }
   }
+
 }
 
 class Promocode {
@@ -204,6 +221,36 @@ Promocode.add('SUMMER2023', 0.9)
 Promocode.add('DISCOUNT50', 0.5)
 Promocode.add('SALE25', 0.75)
 
+  static updateById = (id, {data}) => {
+    const product = this.getById(id);
+    const { name, price, description }  = data;
+    if (product) {
+      if (name) {
+        product.name = name
+      }
+
+      if(price){
+        product.price = price
+      }
+
+      if(description){
+        product.description = description
+      }
+
+      return true
+    } else {
+      return false
+    }
+  }
+  static update = (product, {email}) => {
+    if(email) {
+      product.email = email
+    }
+  }
+}
+
+// ================================================================
+
 // router.get Створює нам один ентпоїнт
 
 // ↙️ тут вводимо шлях (PATH) до сторінки
@@ -221,22 +268,142 @@ router.get('/', function (req, res) {
   // ↑↑ сюди вводимо JSON дані
 })
 
-
 router.get('/purchase-product', function (req, res) {
   const id = Number(req.query.id)
   // res.render генерує нам HTML сторінку
-  // ↙️ cюди вводимо назву файлу з сontainer
+  const list = Product.getList();
+   // ↙️ cюди вводимо назву файлу з сontainer
   res.render('purchase-product', {
     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
     style: 'purchase-product',
-
     data: {
       list: Product.getRandomList(id),
       product: Product.getById(id), 
     },
+
+    style: 'index',
+
+    data: {
+      products: {
+        list,
+        isEmpty: list.length === 0,
+      },
+    },
   })
   // ↑↑ сюди вводимо JSON дані
 })
+
+// ================================================================
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.post('/product-create', function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const {name, price, description} = req.body
+  const product = new Product(name, price, description);
+  Product.add(product)
+  console.log(Product.getList());
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('success-info', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'success-info',
+    info: res ? 'Товар оновлений' : 'Сталася помилка'
+  })
+  // ↑↑ сюди вводимо JSON дані
+})
+router.get('/product-list', (req, res) => {
+  const list = Product.getList();
+  console.log(list);
+  res.render('product-list', { style: 'product-list',
+  data: {
+    products: {
+      list,
+      isEmpty: list.length === 0,
+    },
+  },
+})
+// сюди вводимо JSON дані
+});
+// ================================================================
+router.get('/product-create', function(req, res) {
+    console.log(req.body);
+    // ↙️ cюди вводимо назву файлу з сontainer
+    res.render('product-create', {
+      // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+      style: 'product-create',
+    })
+      // ↑↑ сюди вводимо JSON дані
+});
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.get('/product-delete', function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const {id} = req.query
+  Product.deleteById(Number (id));
+
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('success-info', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'success-info',
+    info: 'Товар видалений', 
+  })
+  // ↑↑ сюди вводимо JSON дані
+})
+
+// ↙️ тут вводимо шлях (PATH) до сторінки
+router.post('/product-update', function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const {email, password, id} = req.body
+  let  result = false
+
+  const product = Product.getById(Number(id))
+  if(product.verifyDescription(description)) {
+    Product.update(product, {email})
+    result = true
+  }
+  Product.deleteById(Number (id));
+  console.log(email, password, id);
+  // let result = false;
+
+  // if()
+  // ↙️ cюди вводимо назву файлу з сontainer
+   
+  res.render('success-info', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'success-info',
+    info: 'Емайл пошта оновлена', 
+  })
+  // ↑↑ сюди вводимо JSON дані
+})
+router.get('/product-edit', function (req, res) {
+  // res.render генерує нам HTML сторінку
+
+  const { id } = req.query
+
+  const product = Product.getById(Number(id))
+
+  // console.log(product)
+
+  if (product) {
+    // ↙️ cюди вводимо назву файлу з сontainer
+    return res.render('product-edit', {
+      // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+      style: 'product-edit',
+
+      data: {
+        name: product.name,
+        price: product.price,
+        id: product.id,
+        description: product.description,
+      },
+    })
+  } else {
+    return res.render('product-alert', {
+      // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+      style: 'product-alert',
+      info: 'Продукту за таким ID не знайдено',
+    })
+  }
+})
+// ↑↑ сюди вводимо JSON дані
 
 router.post('/purchase-create', function(req, res) {
   const id = Number(res.query.id)
@@ -489,5 +656,52 @@ router.post('/purchase-submit', function(req, res) {
 }) 
 
 
+router.post('/product-edit', function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const { id, name, price, description } = req.body
+
+  const product = Product.updateById(Number(id), {
+    name,
+    price,
+    description,
+  })
+
+  console.log(id)
+  console.log(product)
+
+  if (product) {
+    // ↙️ cюди вводимо назву файлу з сontainer
+    res.render('product-alert', {
+      // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+      style: 'product-alert',
+      info: 'Інформація про товар оновлена',
+    })
+  } else {
+    // ↙️ cюди вводимо назву файлу з сontainer
+    res.render('product-alert', {
+      // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+      style: 'product-alert',
+      info: 'Сталася помилка',
+    })
+  }
+  // ↑↑ сюди вводимо JSON дані
+})
+
+// ================================================================
+
+router.get('/product-delete', function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const { id } = req.query
+
+  Product.deleteById(Number(id))
+
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('product-alert', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'product-alert',
+    info: 'Товар видалений',
+  })
+  // ↑↑ сюди вводимо JSON дані
+})
 // Підключаємо роутер до бек-енду
 module.exports = router

@@ -1,0 +1,22 @@
+<div class="form">
+    <h1 class="form__title">Редагувати товар</h1>
+    <form method="POST" action="/product-edit">
+        <div class="form__content">
+            <div class="form__field">
+                <p>{{id}}</p>
+                {{#if product}}
+                {{style}}
+                {{#with data}}
+                <p>{{name}}</p>
+                <p>{{price}}</p>
+                <p>{{id}}</p>
+                <p>{{description}}</p>
+                {{/with}}
+                {{#else}}
+                {{style}}
+                <p>{{info}}</p>
+                {{/if}}
+            </div>
+        </div>
+    </form>
+</div>
