@@ -22,3 +22,12 @@
     border-radius: 10px;
 }
 
+.cart {
+    display: grid;
+    gap: space(2);
+}
+
+.cart__item {
+    display: flex;
+    justify-content: space-between;
+}
