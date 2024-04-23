@@ -2,12 +2,12 @@
 
 .product-card {
     border-radius: 10px;
-    border: 1px solid;
-    padding:space(4);
+    border: 1px solid s.color(border);
+    padding: s.space(4);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: space(3);
+    gap: s.space(3);
 }
 .product-card__image {
     max-width: 300px;

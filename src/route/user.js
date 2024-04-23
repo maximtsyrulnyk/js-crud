@@ -60,6 +60,41 @@ class User {
 }
 
 // ================================================================
+router.post('/user-create', function(req, res) {
+  const {email, login, password} = req.body
+
+  const user = new User(email, login, password)
+
+  User.add(user)
+
+  console.log(User.getList())
+
+  res.render('user-success-info', {
+    style: 'user-success-info',
+    info: 'Користувач створений', 
+  })
+})
+
+// ================================================================
+router.post('/user-update', function (req, res) {
+  const {email, password, id} = req.body
+
+  let result = false
+
+  const user = User.getById(Number(id))
+
+  if(user.verifyPassword(password)) {
+    User.update(user, {email})
+    result = true
+  }
+
+  res.render('user-success-info', {
+    style: 'user-success-info',
+    info: result
+      ? 'Емайл пошта оновлена'
+      : 'Сталася помилка', 
+  })
+})
 
 // router.get Створює нам один ентпоїнт
 
