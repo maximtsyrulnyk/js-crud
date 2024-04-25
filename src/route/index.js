@@ -326,6 +326,8 @@ router.post('/purchase-create', function(req, res) {
     // ↑↑ сюди вводимо JSON дані
 })
 router.post('/purchase-submit', function(req, res) {
+  console.log(req.query);
+  console.log(req.body)
   const id = Number(req.query.id)
 
   let {

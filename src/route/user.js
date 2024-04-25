@@ -76,6 +76,19 @@ router.post('/user-create', function(req, res) {
 })
 
 // ================================================================
+
+router.get('/user-delete', function (req, res) {
+  const {id} = req.query
+
+  User.deleteById(Number(id))
+
+  res.render('user-success-info', {
+    style: 'user-success-info',
+    info: 'Користувач видалений', 
+  })
+})
+
+
 router.post('/user-update', function (req, res) {
   const {email, password, id} = req.body
 

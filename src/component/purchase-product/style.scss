@@ -19,13 +19,13 @@
 }
 .product-card__subtitle {
     font-size: 16px;
-    color: color(gray);
+    color: s.color(gray);
 }
 
 .product-card__category {
-    padding: space(1) space(3);
+    padding: s.space(1) s.space(3);
     font-size: 14px;
-    color: color(dark);
+    color: s.color(dark);
     border: 1px solid transparent;
 }
 

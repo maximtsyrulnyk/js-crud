@@ -4,7 +4,7 @@
 }}
 
 <main class="main">
-    {{> heading title="Інформація про товар" }}
+    {{> heading title="Інформація про товар" info="Комп'ютери та ноутбуки"}}
 
     {{#with data.product}}
     <form method="POST" action="/purchase-create?id={{id}}">
