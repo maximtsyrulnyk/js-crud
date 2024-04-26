@@ -490,6 +490,8 @@ router.post('/purchase-submit', function(req, res) {
   })
 }) 
 
-
+function editOrder() {
+  window.location.href = "purchase-edit.html";
+}
 // Підключаємо роутер до бек-енду
 module.exports = router

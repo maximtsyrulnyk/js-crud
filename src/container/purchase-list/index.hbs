@@ -1,0 +1,28 @@
+{{!
+Це код container файлу для index сторінки,
+в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
+}}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<main class="main">
+    {{> heading title="Товари" info="список всіх замовлень "}}
+    <h1>Purchase List</h1>
+    <ul id="purchase-list">
+        <li><a href="purchase-info.html?id=1">Order 1</a></li>
+        <li><a href="purchase-info.html?id=2">Order 2</a></li>
+        <!-- Add more orders as needed -->
+    </ul>
+</main>
+
+<body>
+    <h1>Purchase List</h1>
+    <ul id="purchase-list">
+        <!-- List items will be dynamically generated using JavaScript -->
+    </ul>
+    <script src="index.js"></script>
+</body>
