@@ -161,8 +161,7 @@ class Purchase {
 
   static updateById = (id, data) => {
     const purchase = Purchase.getById(id)
-
-
+    
     if(purchase) {
       if(data.firstname)
         purchase.firstname = data.firstname
@@ -251,6 +250,7 @@ router.post('/purchase-create', function(req, res) {
   // res.render генерує нам HTML сторінку
   const id = Number(req.query.id)
   const amount = Number(req.body.amount)
+  
 
   if(amount < 1) {
     return res.render('alert', {
