@@ -1,11 +1,11 @@
 .product-card {
   border-radius: 10px;
-  border: 1px solid color(border);
-  padding: space(4);
+  border: 1px solid;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: space(3);
+  gap: 12px;
 }
 
 .product-card__image {
@@ -20,13 +20,12 @@
 
 .product-card__subtitle {
   font-size: 16px;
-  color: color(gray);
 }
 
 .product-card__category {
-  padding: space(1) space(3);
+  padding: 4px 12px;
   font-size: 14px;
-  color: color(dark);
+  color: #808080;
   border: 1px solid transparent;
 }
 

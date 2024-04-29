@@ -1,19 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+<form method="POST" action="/purchase-edit?id={{data.id}}">
+    {{>heading}}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Purchase</title>
-</head>
+    {{#with data}}
+    <div class="purchase-item__block">
+        <span class="title">ID:</span>
+        <span class="text">{{id}}</span>
+    </div>
+    {{>divider}}
 
-<body>
-    <h1>Edit Purchase</h1>
-    <!-- Form for editing purchase data -->
-    <form id="edit-form">
-        <!-- Form fields will be added here -->
-        <button type="submit">Save Changes</button>
-    </form>
-</body>
+    <div class="cart__block">
+        {{>field label="Прізвище" name="lastname" value=lastname}}
+        {{>field label="Ім'я" name="firstname" value=firstname}}
+    </div>
 
-</html>
+    <div class="cart__block">
+        {{>field label="Мобільний телефон" name='phone' value=phone}}
+        {{>field label="Електронна пошта" name='email' value=email}}
+    </div>
+    {{>divider}}
+
+    {{>field label="Адреса доставки" name='delivery' value=delivery}}
+    {{>divider}}
+    {{/with}}
+    {{>button text="Зберегти дані"}}
+</form>
