@@ -34,11 +34,28 @@ router.get('/spotify-create', function (req, res) {
     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
     style: 'spatify-create',
 
-    data: {},
+    data: {
+      isMix,
+    },
   })
   // ↑↑ сюди вводимо JSON дані
 })
 
+
+router.post('/spotify-create', function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const isMix = !!req.query.isMix
+  console.log(req.body, req.query);
+
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('spotify-create', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'spatify-create',
+
+    data: { },
+  })
+  // ↑↑ сюди вводимо JSON дані
+})
 // ================================================================
 // Підключаємо роутер до бек-енду
 module.exports = router
