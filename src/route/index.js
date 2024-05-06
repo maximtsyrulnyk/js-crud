@@ -70,6 +70,7 @@ class Playlist {
     this.id = Math.floor(1000 + Math.random() * 9000) // Генеруємо випадкове id
     this.name = name
     this.tracks = []
+    this.image = 'https://picsum.photos/100/100'
   }
 
   // Статичний метод для створення об'єкту Playlist і додавання його до списку #list
@@ -92,12 +93,40 @@ class Playlist {
     .slice(0,3)
     playlist.tracks.push(...randomTracks)
   }
+
+  static getById(id) {
+    return (
+      Playlist.#list.find(
+        (playlist) => playlist.id === id,
+      ) || null
+    ) 
+  }
+
+  deleteTrackById(trackId) {
+    this.tracks = this.tracks.filter(
+      (track) => track.id !== trackId, 
+    )
+  }
+
+  static findListByValue(name) {
+    return this.#list.filter((playlist) =>
+    playlist.name
+    .toLowerCase()
+    .includes(name.toLowerCase()),
+    )
+  }
 }
+
+Playlist.makeMix(Playlist.create('Test'))
+Playlist.makeMix(Playlist.create('Test2'))
+Playlist.makeMix(Playlist.create('Test3'))
+
+// =====================================
 
 // router.get Створює нам один ентпоїнт
 
 // ↙️ тут вводимо шлях (PATH) до сторінки
-router.get('/', function (req, res) {
+router.get('/spotify-choose', function (req, res) {
   // res.render генерує нам HTML сторінку
 
   // ↙️ cюди вводимо назву файлу з сontainer
@@ -121,9 +150,9 @@ router.get('/spotify-create', function (req, res) {
   const name = req.body.name
 
   if(!name) {
-    return res.render('alert', {
+    return res.render('spotify-create', {
       // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-      style: 'alert',
+      style: 'spotify-create',
   
       data: {
         message: 'Помилка',
@@ -169,26 +198,136 @@ router.post('/spotify-create', function (req, res) {
   if(!name) {
     res.render('alert', {
       // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-      style: 'spatify-create',
+      style: 'alert',
   
       data: {
         message: 'Помилка',
-        info: 'Введіть назву'
+        info: 'Введіть назву плейліста',
+        link: isMix
+          ? `/spotify-create?isMix=true`
+          : '/spotify-create',
        },
     })
   }
 
-  console.log(req.body, req.query);
+  const playlist = Playlist.create(name)
 
-  // ↙️ cюди вводимо назву файлу з сontainer
-  res.render('spotify-create', {
-    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-    style: 'spatify-create',
+  if(isMix) {
+    Playlist.makeMix(playlist);
+  }
 
-    data: { },
+  console.log(playlist)
+
+  res.render('spotify-playlist', {
+    style: 'spotify-playlist',
+
+    data: {
+      playlistId: playlist.id,
+      tracks: playlist.tracks,
+      name: playlist.name,
+    }
   })
-  // ↑↑ сюди вводимо JSON дані
+})
+
+
+
+router.get('/spotify-playlist', function(req,res) {
+  const id = Number(req.query.id)
+
+  const playlist = Playlist.getById(id)
+
+  if (!playlist) {
+    return res.render('alert', {
+      style: 'alert',
+
+      data: {
+        message: 'Помилка',
+        info: 'Такого плейліста не знайдено',
+        link: '/'
+      }
+    })
+  }
+
+  res.render('spotify-playlist', {
+    style: 'spotify-playlist',
+
+    data: {
+      playlistId: playlist.id,
+      tracks: playlist.tracks,
+      name: playlist.name,
+    }
+  })
+})
+
+router.get('/spotify-track-delete', function(req, res) {
+  const playlistId = Number(req.query.playlistId)
+  const trackId = Number(req.query.trackId)
+
+  const playlist = Playlist.getById(playlistId)
+
+  if (!playlist) {
+    return res.render('alert', {
+      style: 'alert',
+
+      data: {
+        message: 'Помилка',
+        info: 'Такого плейліста не знайдено',
+        link: `/spotify-playlist?id=${playlistId}`,
+      }
+    })
+  }
+
+  playlist.deleteTrackById(trackId)
+
+  res.render('spotify-playlist', {
+    style: 'spotify-playlist',
+
+    data: {
+      playlistId: playlist.id,
+      tracks: playlist.tracks,
+      name: playlist.name,
+    }
+  })
 })
 // ================================================================
 // Підключаємо роутер до бек-енду
 module.exports = router
+
+router.get('/spotify-search', function(req, res) {
+  const value = ''
+
+  const list = Playlist.findListByValue(value)
+
+  res.render('spotify-search',{
+    style: 'spotify-search',
+    
+    data: {
+      list: list.map(({tracks, ...rest}) => ({
+        ...rest,
+        amount: tracks.length,
+      })),
+      value,
+    },
+  })
+})
+
+router.post('/spotify-search', function(req, res) {
+  const value = req.body.value || ''
+
+  const list = Playlist.findListByValue(value)
+
+  console.log(value)
+
+  res.render('spotify-search', {
+    style: 'spotify-search',
+
+    data: {
+      list: list.map(({tracks, ...rest}) => ({
+        ...rest,
+        amount: tracks.length,
+      })),
+      value,
+    }
+  })
+})
+

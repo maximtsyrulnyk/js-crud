@@ -34,3 +34,61 @@ a {
 .title--center {
     text-align: center;
 }
+
+.track {
+    display: grid;
+    grid-template-columns: 92px 1fr 42px;
+    gap: space(7);
+    align-items: center;
+
+    &__list {
+        display: grid;
+        gap: space(7);
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: space(2);
+    }
+
+    &__name {
+        font-size: 24px;
+        color: color(light);
+    }
+
+    &__author {
+        font-size: 16px;
+        color: color(gray);
+    }
+}
+
+.playlist {
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    gap: space(7);
+    align-items: center;
+
+    &__list {
+        display: grid;
+        gap: space(7);
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: space(2);
+    }
+
+    &__name {
+        font-size: 24px;
+        color: color(light);
+    }   
+
+    &__amount {
+        font-size: 16px;
+        color: color(gray);
+    }
+}
