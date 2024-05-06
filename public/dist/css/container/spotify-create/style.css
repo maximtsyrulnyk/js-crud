@@ -32,6 +32,56 @@ a:hover {
   text-align: center;
 }
 
+.track {
+  display: grid;
+  grid-template-columns: 92px 1fr 42px;
+  gap: space(7);
+  align-items: center;
+}
+.track__list {
+  display: grid;
+  gap: space(7);
+}
+.track__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: space(2);
+}
+.track__name {
+  font-size: 24px;
+  color: color(light);
+}
+.track__author {
+  font-size: 16px;
+  color: color(gray);
+}
+
+.playlist {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: space(7);
+  align-items: center;
+}
+.playlist__list {
+  display: grid;
+  gap: space(7);
+}
+.playlist__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: space(2);
+}
+.playlist__name {
+  font-size: 24px;
+  color: color(light);
+}
+.playlist__amount {
+  font-size: 16px;
+  color: color(gray);
+}
+
 .title--small {
   font-size: 16px;
 }

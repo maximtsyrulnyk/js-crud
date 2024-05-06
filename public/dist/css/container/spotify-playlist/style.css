@@ -1,3 +1,94 @@
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.6s;
+}
+a:hover {
+  opacity: 0.6;
+}
 
+.main {
+  background-color: color(dark);
+  height: 100%;
+  color: color(light);
+  display: flex;
+  justify-content: center;
+  padding: space(6) space(2);
+}
+
+.main__content {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: space(15);
+}
+
+.title {
+  font-size: 24px;
+}
+
+.title--center {
+  text-align: center;
+}
+
+.track {
+  display: grid;
+  grid-template-columns: 92px 1fr 42px;
+  gap: space(7);
+  align-items: center;
+}
+.track__list {
+  display: grid;
+  gap: space(7);
+}
+.track__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: space(2);
+}
+.track__name {
+  font-size: 24px;
+  color: color(light);
+}
+.track__author {
+  font-size: 16px;
+  color: color(gray);
+}
+
+.playlist {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: space(7);
+  align-items: center;
+}
+.playlist__list {
+  display: grid;
+  gap: space(7);
+}
+.playlist__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: space(2);
+}
+.playlist__name {
+  font-size: 24px;
+  color: color(light);
+}
+.playlist__amount {
+  font-size: 16px;
+  color: color(gray);
+}
+
+.add-button {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  align-items: center;
+  gap: space(6);
+  color: color(light);
+  font-size: 18px;
+}
 
 /*# sourceMappingURL=style.css.map */

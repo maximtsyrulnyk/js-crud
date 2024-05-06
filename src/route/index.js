@@ -227,6 +227,16 @@ router.post('/spotify-create', function (req, res) {
       name: playlist.name,
     }
   })
+
+  res.render('spotify-playlist-add', {
+    style: 'spotify-playlist-add',
+
+    data: {
+      playlistId: playlist.id,
+      tracks: playlist.tracks,
+      name: playlist.name,
+    }
+  })
 })
 
 
@@ -250,6 +260,34 @@ router.get('/spotify-playlist', function(req,res) {
 
   res.render('spotify-playlist', {
     style: 'spotify-playlist',
+
+    data: {
+      playlistId: playlist.id,
+      tracks: playlist.tracks,
+      name: playlist.name,
+    }
+  })
+})
+
+router.get('/spotify-playlist-add', function(req,res) {
+  const id = Number(req.query.id)
+
+  const playlist = Playlist.getById(id)
+
+  if (!playlist) {
+    return res.render('alert', {
+      style: 'alert',
+
+      data: {
+        message: 'Помилка',
+        info: 'Такого плейліста не знайдено',
+        link: '/'
+      }
+    })
+  }
+
+  res.render('spotify-playlist-add', {
+    style: 'spotify-playlist-add',
 
     data: {
       playlistId: playlist.id,

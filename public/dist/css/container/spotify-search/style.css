@@ -82,21 +82,22 @@ a:hover {
   color: color(gray);
 }
 
-.choose {
+.search {
+  background-color: #292929;
+  padding: space(2) space(8);
+  border-radius: 8px;
   display: grid;
-  gap: space(6);
+  grid-template-columns: 56px 1fr auto;
+  gap: space(8);
+  color: color(light);
+  font-size: 24px;
 }
-
-.choose__item {
-  display: grid;
-  grid-template-columns: 56px 1fr;
-  gap: space(6);
+.search__button {
+  color: color(light);
+  transition: opacity 0.6s;
 }
-
-.choose__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.search__button:hover {
+  opacity: 0.6;
 }
 
 /*# sourceMappingURL=style.css.map */
